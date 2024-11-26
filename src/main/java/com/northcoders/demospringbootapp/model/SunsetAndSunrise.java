@@ -2,7 +2,8 @@ package com.northcoders.demospringbootapp.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import java.util.List;
+import java.time.LocalDateTime;
+import java.util.Date;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public record Results(List<CityCoordinates> results) {}
+public record SunsetAndSunrise(String sunrise, String sunset) {}
