@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.reactive.function.client.WebClient;
 
 import java.util.List;
+import java.util.Scanner;
 
 @RestController
 @RequestMapping("api/v1")
@@ -53,7 +54,7 @@ public class DemoController {
     public static String getSunsetAndSunriseAPI(@RequestParam float lat, @RequestParam float lng) throws JsonProcessingException {
         SunsetAndSunriseResults sunsetAndSunriseResults = getSunsetAndSunrise(lat, lng);
         return "Sunrise: " + sunsetAndSunriseResults.results().sunrise() +
-                "\nSunrise: " + sunsetAndSunriseResults.results().sunset();
+                "\nSunset: " + sunsetAndSunriseResults.results().sunset();
     }
 
     public static SunsetAndSunriseResults getSunsetAndSunrise(float latitude, float longitude) throws JsonProcessingException {
@@ -67,6 +68,17 @@ public class DemoController {
                 .bodyToMono(String.class)
                 .block();
         return mapper.readValue(location, SunsetAndSunriseResults.class);
+    }
+
+    public static void getCityName() throws JsonProcessingException {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Input: ");
+        String cityName = scanner.nextLine();
+        scanner.close();
+        CoordinatesResults coordinatesResults = getCoordinates(cityName);
+        float lat = coordinatesResults.results().getFirst().latitude();
+        float lng = coordinatesResults.results().getFirst().longitude();
+        System.out.println(getSunsetAndSunriseAPI(lat, lng));
     }
 
 

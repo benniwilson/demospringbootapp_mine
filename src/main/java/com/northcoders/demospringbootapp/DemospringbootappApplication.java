@@ -16,7 +16,8 @@ public class DemospringbootappApplication {
 
 	public static void main(String[] args) throws JsonProcessingException {
 		SpringApplication.run(DemospringbootappApplication.class, args);
-		System.out.println(DemoController.getSunsetAndSunriseAPI(51.50853f, -0.12574f));
+		DemoController.getCityName();
+
 	}
 
 }
